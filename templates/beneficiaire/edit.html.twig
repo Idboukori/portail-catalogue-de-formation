@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Beneficiaire{% endblock %}
+
+{% block body %}
+    <h1>Edit Beneficiaire</h1>
+
+    {{ include('beneficiaire/_form.html.twig', {'button_label': 'Update'}) }}
+    {% if app.user %}
+    <a style="border-radius: 10px; padding : 5px; margin-bottom : 10px;" class="btn btn-info" href="{{ path('beneficiaire_index_ben' , { 'id': app.user.id}) }}">back to list</a>
+    {% else %}
+    <a style="border-radius: 10px; padding : 5px; margin-bottom : 10px;" class="btn btn-info" href="{{ path('beneficiaire_index') }}">back to list</a>
+    {% endif %}
+    {% if is_granted('ROLE_ADMIN') %}
+    {{ include('beneficiaire/_delete_form.html.twig') }}
+    {% endif %}
+{% endblock %}

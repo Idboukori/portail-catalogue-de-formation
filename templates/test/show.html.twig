@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Test{% endblock %}
+
+{% block body %}
+    <h1>Test</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ test.id }}</td>
+            </tr>
+            <tr>
+                <th>Intitule</th>
+                <td>{{ test.intitule }}</td>
+            </tr>
+            <tr>
+                <th>Duree</th>
+                <td>{{ test.duree }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a style="padding: 5px;" class="btn btn-success" href="{{ path('test_index') }}">back to list</a>
+
+    <a style="padding: 5px;" class="btn btn-success" href="{{ path('test_edit', {'id': test.id}) }}">edit</a>
+
+    <a style="padding: 5px;" class="btn btn-success" href="{{ path('qa_new', {'id': test.id}) }}">Add question </a>
+
+    {{ include('test/_delete_form.html.twig') }}
+{% endblock %}

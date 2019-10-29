@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Quiz{% endblock %}
+
+{% block body %}
+    <h1>Create Quiz</h1>
+    <br>
+
+    {% for question in quiz.questions %}
+    <h6>{{question.question}}</h6> <br> <br>
+    {% for answer in question.answers %}
+    <label>{{answer.answer}}</label> <br>
+    {% endfor %}
+    <br>
+    <a style="border-radius: 10px; padding : 5px; margin-bottom : 10px;" class="btn btn-danger" href="{{path('quest_del',{'id' : question.id})}}">Supprimer</a>
+    <br>
+    <br>
+    {% endfor %}
+    <br>
+    <h5>Add question</h5> <br>
+    <form action="" method="POST">
+        Question 1 : <input type="text" name="question1" placeholder="Question" >
+        <br> <br><label>Answers :</label> <br>
+        <input type="checkbox" name="checkanswer1"><input required type="text" placeholder="answer 1" name="answer11" > 
+        <input type="checkbox" name="checkanswer2"><input required type="text" placeholder="answer 2" name="answer21" > 
+        <input type="checkbox" name="checkanswer3"><input required type="text" placeholder="answer 3" name="answer31" > 
+        <br><br> 
+        <!-- Question 2 : <input type="text" name="question2" placeholder="Question" >
+        <br> <br><label>Answers :</label> 
+        <input type="text" placeholder="answer 1" name="answer12" >
+        <input type="text" placeholder="answer 2" name="answer22" >
+        <input type="text" placeholder="answer 3" name="answer32" >
+        <br><br>
+        Question 3 : <input type="text" name="question3" placeholder="Question" >
+        <br> <br><label>Answers :</label> 
+        <input type="text" placeholder="answer 1" name="answer13" >
+        <input type="text" placeholder="answer 2" name="answer23" >
+        <input type="text" placeholder="answer 3" name="answer33" > -->
+        
+        <button type="submit"> save </button>
+    </form>
+
+    <a href="{{ path('quiz_index') }}">back to list</a> <br><br>
+{% endblock %}

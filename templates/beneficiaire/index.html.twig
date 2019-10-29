@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Beneficiaire index{% endblock %}
+
+{% block body %}
+
+        <div class="row">
+        <h1 class="col-md-10">Beneficiaire list</h1>
+        {% if app.user and is_granted('ROLE_ADMIN') %}
+            <div class="col-md-2">
+            <a  style="margin-top: 20px;" class="btn btn-info " href="{{ path('beneficiaire_new') }}">Create new</a>
+            </div>
+            {% endif %}
+        </div>
+
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for beneficiaire in beneficiaires %}
+            <tr>
+                <td>{{ beneficiaire.id }}</td>
+                <td>{{ beneficiaire.nom }}</td>
+                <td>{{ beneficiaire.prenom }}</td>
+                <td>{{ beneficiaire.email }}</td>
+                <td>
+                    
+                    <a style="border-radius: 10px; padding : 5px; margin-bottom : 10px;" class="btn btn-info" href="{{ path('beneficiaire_show', {'id': beneficiaire.id}) }}">show</a>
+                    {% if app.user and beneficiaire.email == app.user.email %}
+                    <a style="border-radius: 10px; padding : 5px; margin-bottom : 10px;" class="btn btn-info" href="{{ path('beneficiaire_edit', {'id': beneficiaire.id , 'user':app.user.id}) }}">edit</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <p> FORMATEUR </p>
+                    {% else %}
+                    {% if stat == 0 %}
+                    <a style="border-radius: 10px; padding : 5px; margin-bottom : 10px;" class="btn btn-info" href="{{ path('demande_formateur_new', {'id': beneficiaire.id , 'user':app.user.id}) }}">Devenir formateur</a>
+                    {% else %}
+                        {% if stat == 1 %}
+                        <p> Demande en attente </p>
+                        {% else %}
+                        <p> FORMATEUR </p>
+                        {% endif %}
+                    {% endif %}
+                    {% endif %}
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div style="margin-bottom: 10px;" class="Page navigation example">
+        {{ knp_pagination_render(beneficiaires) }}
+    </div>
+{% endblock %}

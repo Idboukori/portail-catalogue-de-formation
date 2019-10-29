@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Beneficiaire{% endblock %}
+
+{% block body %}
+    <h1>Create new Beneficiaire</h1>
+
+    {{ include('beneficiaire/_form.html.twig') }}
+
+    <a style="border-radius: 10px; padding : 5px; margin-bottom : 10px;" class="btn btn-info" href="{{ path('beneficiaire_index') }}">back to list</a>
+{% endblock %}

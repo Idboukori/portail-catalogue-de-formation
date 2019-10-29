@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Beneficiaire{% endblock %}
+
+{% block body %}
+    <h1>Beneficiaire</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ beneficiaire.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ beneficiaire.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ beneficiaire.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ beneficiaire.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    {% if app.user %}
+    <a style="border-radius: 10px; padding : 5px; margin-bottom : 10px;" class="btn btn-info" href="{{ path('beneficiaire_index_ben' , { 'id': app.user.id}) }}">back to list</a>
+    {% if app.user.email == beneficiaire.email %}
+    <a style="border-radius: 10px; padding : 5px; margin-bottom : 10px;" class="btn btn-info" href="{{ path('beneficiaire_edit', {'id': beneficiaire.id , 'user':app.user.id}) }}">edit</a>
+    {% endif %}
+    {% if is_granted("ROLE_ADMIN") %}
+    {{ include('beneficiaire/_delete_form.html.twig') }}
+    {% endif %}
+    {% else %}
+    <a style="border-radius: 10px; padding : 5px; margin-bottom : 10px;" class="btn btn-info" href="{{ path('beneficiaire_index') }}">back to list</a>
+    {% endif %}
+{% endblock %}

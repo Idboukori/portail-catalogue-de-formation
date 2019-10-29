@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Chapitre{% endblock %}
+
+{% block body %}
+    <h1>Chapitre</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ chapitre.id }}</td>
+            </tr>
+            <tr>
+                <th>Intitule</th>
+                <td>{{ chapitre.intitule }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ chapitre.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a style="border-radius: 10px; padding : 5px; margin-bottom : 10px;" class="btn btn-info" href="{{ path('chapitre_index') }}">back to list</a>
+
+    <a style="border-radius: 10px; padding : 5px; margin-bottom : 10px;" class="btn btn-info" href="{{ path('chapitre_edit', {'id': chapitre.id}) }}">edit</a>
+
+    <a style="border-radius: 10px; padding : 5px; margin-bottom : 10px;" class="btn btn-info" href="{{ path('test_new', {'id': chapitre.id }) }}">Test</a>
+
+    {{ include('chapitre/_delete_form.html.twig') }}
+{% endblock %}

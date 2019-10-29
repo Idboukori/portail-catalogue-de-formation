@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DemandeFormateur index{% endblock %}
+
+{% block body %}
+    <h1>Demande Formateur</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>BrochureFileName</th>
+                <th>State</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for demande_formateur in demande_formateurs %}
+            {% if demande_formateur.state == 0 %}
+            <tr>
+                <td>{{ demande_formateur.id }}</td>
+                <td><a href="{{ asset('uploads/brochures/' ~ demande_formateur.brochureFileName) }}">View brochure (PDF)</a>
+                </td>
+                <td>{{demande_formateur.state}}</td>
+                <td>
+                    <a href="{{ path('demande_formateur_show', {'id': demande_formateur.id}) }}">show</a>
+                    <a href="{{ path('demande_formateur_edit', {'id': demande_formateur.id}) }}">edit</a>
+                    <a href="{{ path('accept', {'id': demande_formateur.id}) }}">Accept</a>
+                   
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                    <td>{{ demande_formateur.id }}</td>
+                    <td><a href="{{ asset('uploads/brochures/' ~ demande_formateur.brochureFileName) }}">View brochure (PDF)</a>
+                    </td>
+                    <td>{{demande_formateur.state}}</td>
+                    <td>
+                        <a href="{{ path('demande_formateur_show', {'id': demande_formateur.id}) }}">show</a>
+                        <a href="{{ path('demande_formateur_edit', {'id': demande_formateur.id}) }}">edit</a>
+                        <label>Accepted</label>
+                    </td>
+                </tr>
+            {% endif %}
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('demande_formateur_new') }}">Create new</a>
+{% endblock %}

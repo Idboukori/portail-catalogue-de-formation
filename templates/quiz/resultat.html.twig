@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Test{% endblock %}
+
+{% block body %}
+    <h1>Result of the test</h1>
+    <br><br>
+   {% for ans in demande.answers %}
+
+        Question : <h5 style="color: indigo"> {{ans.question.question}} </h5>
+        <br>
+        Answer <h6> {{ans.answer}} </h6>
+        <br><br>
+
+   {% endfor %}
+   <a style="border-radius: 10px; padding : 5px; margin-bottom : 10px; margin-bottom : 15px;" class="btn btn-info"  href="{{ path('demande_formation_index', {'id': demande.quiz.formation.id}) }}">Back to demandes</a>
+
+{% endblock %}

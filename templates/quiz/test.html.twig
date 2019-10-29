@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Test{% endblock %}
+
+{% block body %}
+    <h1>Test</h1>
+    <br><br>
+    {% if quiz is empty %}
+        <h4>NO TEST YET</h4>
+    {% else %}
+    <form action="" method="POST">
+        {% for question in quiz.questions %}
+            <h6>{{question.question}}</h6> <br> <br>
+            {% for answer in question.answers %}
+            <label><input type="radio" value="{{answer.answer}}" name="{{question.id}}">{{answer.answer}}</label> <br>
+            {% endfor %}
+            <br>
+        {% endfor %}
+        <br>
+        {% if app.user.email == quiz.formation.formateur %}
+            <a href=""> Edit quiz </a>
+        {% else %}
+            <button type="submit"> envoyer </button>
+        {% endif %}
+    </form>
+    {% endif %}
+    <br>
+{% endblock %}

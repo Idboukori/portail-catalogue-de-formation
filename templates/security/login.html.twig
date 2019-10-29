@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %} S'identifier {% endblock %}
+{% block page %} S'identifier {% endblock %}
+
+{% block body %}
+    <br>
+    <h4>LOGIN</h4>
+    <br>
+    {% if error %}
+        <div class="alert alert-danger">
+            <ul class="list-unstyled mb-0">
+                <li><span class="initialism form-error-icon badge badge-danger">Error</span> 
+                    <span class="form-error-message">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+                </li>
+            </ul>
+        </div>
+    {% endif %}
+    <form action="{{ path('login')}}" method="POST"> 
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" name="_username" required id="exampleInputEmail1" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+                <label for="exampleInputEmail1">Password</label>
+                <input type="password" class="form-control" name="_password" id="exampleInputEmail1"  placeholder="Enter password">
+        </div>
+        <a class="btn btn-link" href="{{ path('request_resetting')}}"> Forgot my password ? </a>
+        <div class="form-group">
+            <button type="submit" class="btn btn-outline-success" style="widows: 30px;padding: 8px">Login</button>
+        </div>
+        
+        
+    </form>
+    
+{% endblock %}

@@ -1,0 +1,88 @@
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}New Logo{% endblock %}
+            </title>
+        {% block stylesheets %}
+                 
+         <!-- Google Fonts -->
+         <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i,800" rel="stylesheet">
+
+         <!-- Stylesheets -->
+         <link rel="stylesheet" href="/../css/bootstrap.min.css"/>
+         <link rel="stylesheet" href="/../css/font-awesome.min.css"/>
+         <link rel="stylesheet" href="/../css/flaticon.css"/>
+         <link rel="stylesheet" href="/../css/owl.carousel.css"/>
+         <link rel="stylesheet" href="/../css/style.css"/>
+        {% endblock %}
+        
+    </head>
+    <body>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    
+                  
+                    <div class="collapse navbar-collapse" id="navbarColor03">
+                      <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                          {% if app.user %}
+                          <a class="nav-link" href="{{path('formation_index' , { 'email' : app.user.email })}}">Formations</a>
+                          {% else %}
+                          <a class="nav-link" href="{{path('formation_index_out')}}">Formations</a>
+                          {% endif %}
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="/formateur">Formateur</a>
+                        </li>
+                        <li class="nav-item">
+                            {% if app.user %}
+                          <a class="nav-link" href="{{path('beneficiaire_index_ben' , { 'id': app.user.id} )}}">Beneficiaire</a>
+                          {% else %}
+                          <a class="nav-link" href="{{path('beneficiaire_index')}}">Beneficiaire</a>
+                          {% endif %}
+
+                        </li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{path('demande_formateur_index')}}">Mes demandes</a>
+                          </li>
+                        {% endif %}
+                      </ul>
+                      <form class="form-inline my-2 my-lg-0">
+                        
+                        
+                        
+                        {% if not app.user %}
+                        <a class="nav-link" href="/login">LOGIN</a>
+                        <a class="nav-link" href="/registration">REGISTER</a>
+                        {% else %}
+                        
+                         <a class="nav-link" href="{{path('profil', {'id': app.user.id} )}}">{{app.user.username}}</a>
+                         <a class="nav-link" href="/logout">LOGOUT</a>
+                        {% endif %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <br>
+                            <a href="{{path('logo_new')}}">edit logo</a>
+                        {% endif %}
+                      </form>
+                    </div>
+            </nav>
+            <div class="container">
+              
+                {% block body %}
+                <h1>Create new Logo</h1>
+
+                    {{ include('logo/_form.html.twig') }}
+
+                    <a href="{{ path('logo_index') }}">back to list</a>
+                {% endblock %}
+              
+            </div>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

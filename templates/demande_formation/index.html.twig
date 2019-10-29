@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DemandeFormation index{% endblock %}
+
+{% block body %}
+    <h1>DemandeFormation index</h1>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Test Answers</th>
+                <th>Demandeur</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for demande_formation in demande_formations %}
+            <tr>
+                <td>{{ demande_formation.id }}</td>
+                <td><a style="font-weight: bold;" href="{{path('test_resultat' ,{'id' : demande_formation.id}) }}">Result</a></td>
+                <td>{{demande_formation.beneficiaire.nom}} {{demande_formation.beneficiaire.prenom}}</td>
+                <td>
+                    <a href="{{ path('demande_formation_show', {'id': demande_formation.id}) }}">show</a>
+                    {% if demande_formation.state == 0 %}
+                    <a href="{{ path('demande_formation_accept', {'id': demande_formation.id}) }}">Accept</a>
+                    {% else %}
+                    <label> Accepted </label>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

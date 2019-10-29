@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Qa index{% endblock %}
+
+{% block body %}
+    <h1>Qa index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Question</th>
+                <th>Answer</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for qa in qas %}
+            <tr>
+                <td>{{ qa.id }}</td>
+                <td>{{ qa.question }}</td>
+                <td>{{ qa.answer }}</td>
+                <td>
+                    <a href="{{ path('qa_show', {'id': qa.id}) }}">show</a>
+                    <a href="{{ path('qa_edit', {'id': qa.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('qa_new') }}">Create new</a>
+{% endblock %}

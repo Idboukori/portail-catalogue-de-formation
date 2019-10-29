@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Chapitre index{% endblock %}
+
+{% block body %}
+<!-- <div class="row">
+        <h1 class="col-md-10">Chapitre list</h1>
+        {% if app.user and is_granted('ROLE_ADMIN') %}
+            <div class="col-md-2">
+            <a  style="margin-top: 20px;" class="btn btn-info " href="{{ path('chapitre_new') }}">Create new</a>
+            </div>
+            {% endif %}
+        </div> -->
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Intitule</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for chapitre in chapitres %}
+            <tr>
+                <td>{{ chapitre.id }}</td>
+                <td>{{ chapitre.intitule }}</td>
+                <td>{{ chapitre.description }}</td>
+                <td>
+                    <a style="border-radius: 10px; padding : 5px; margin-bottom : 10px;" class="btn btn-info" href="{{ path('chapitre_show', {'id': chapitre.id}) }}">show</a>
+                    <a style="border-radius: 10px; padding : 5px; margin-bottom : 10px;" class="btn btn-info" href="{{ path('chapitre_edit', {'id': chapitre.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

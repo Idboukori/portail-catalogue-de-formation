@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DemandeFormateur{% endblock %}
+
+{% block body %}
+    <h1>DemandeFormateur</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ demande_formateur.id }}</td>
+            </tr>
+            <tr>
+                <th>BrochureFileName</th>
+                <td>{{ demande_formateur.brochureFileName }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('demande_formateur_index') }}">back to list</a>
+
+    <a href="{{ path('demande_formateur_edit', {'id': demande_formateur.id}) }}">edit</a>
+
+    {{ include('demande_formateur/_delete_form.html.twig') }}
+{% endblock %}

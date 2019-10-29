@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+
+<head>
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Favicon-->
+	<link rel="shortcut icon" href="../img/fav.png">
+	<!-- Author Meta -->
+	<meta name="author" content="codepixer">
+	<!-- Meta Description -->
+	<meta name="description" content="">
+	<!-- Meta Keyword -->
+	<meta name="keywords" content="">
+	<!-- meta character set -->
+	<meta charset="UTF-8">
+	<!-- Site Title -->
+	<title>ETIL</title>
+
+	<!--
+			Google Font
+			============================================= -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,500,600" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500i" rel="stylesheet">
+
+	<!--
+			CSS
+			============================================= -->
+			<style>
+.image--cover {
+                      width: 30px;
+                      height: 30px;
+                      border-radius: 60%;
+                      margin: 10px;
+                    
+                      object-fit: cover;
+                      object-position: center right;
+                    }
+	</style>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css">
+	<link rel="stylesheet" href="/../css/linearicons.css">
+	<link rel="stylesheet" href="/../css/font-awesome.min.css">
+	<link rel="stylesheet" href="/../css/bootstrap.css">
+	<link rel="stylesheet" href="/../css/magnific-popup.css">
+	<link rel="stylesheet" href="/../css/nice-select.css">
+	<link rel="stylesheet" href="/../css/animate.min.css">
+	<link rel="stylesheet" href="/../css/owl.carousel.css">
+	<link rel="stylesheet" href="/../css/main.css">
+</head>
+
+<body>
+
+	<!-- Start Header Area -->
+	<header id="header">
+		<div class="container">
+			<div class="row align-items-center justify-content-between d-flex">
+				<div id="logo">
+					<a href="index.html"><img width="120" height="120" src="/../img/logo.png" alt="" title="" /></a>
+				</div>
+				<nav id="nav-menu-container">
+					<ul class="nav-menu">
+						<li class="menu-active"><a href="/">Accueil</a></li>
+						{% if app.user %}
+						<li><a href="{{path('formation_index' , { 'email' : app.user.email })}}">Formations</a></li>
+						{% else %}
+						<li><a href="{{path('formation_index_out')}}">Formations</a></li>
+						{% endif %}
+						<li><a href="/contactus">Contactez nous</a></li>
+						<li><a href="/apropos">A propos </a></li>
+						 {% if not app.user %}
+						<li><a class="nav-link" href="/login"> S'identifier </a></li>
+                        <li><a class="nav-link" href="/registration">S'inscrire</a></li>
+						 {% else %}
+
+						<li class="menu-has-children"><a href="">{{app.user.username}}</a>
+							<ul>
+								<li><a href="{{path('profil', {'id': app.user.id} )}}">Profil</a></li>
+								{% if is_granted('ROLE_ADMIN') %}
+									<li><a href="{{ path('logo_new')}}">Edit LOGO</a></li>
+								{% endif %}
+								{% if app.user.state == 1 %}
+								<li><a href="{{ path('formation_new', {'id':app.user.email}) }}">Ajouter cours</a></li>
+								{% endif %}
+								<li><a href="{{path('mes_formations')}}">Mes cours</a></li>
+								<li><a href="/logout">Déconnecter</a></li>
+							</ul>
+						</li>
+						<li>
+						{% if app.user.image == null %}
+                          <img  class="image--cover" src="/../img/user.png") }}>
+                        {% else %}
+                          <img  class="image--cover" src="/../img/{{app.user.image}}") }}>
+                        {% endif %}
+                        
+						</li>
+						{% endif %}
+						
+						
+					</ul>
+				</nav><!-- #nav-menu-container -->
+			</div>
+		</div>
+	</header>
+	<!-- End Header Area -->
+
+
+	<!-- Start Banner Area -->
+	<section class="banner-area relative">
+		<div class="container">
+			<div class="row d-flex align-items-center justify-content-center">
+				<div class="about-content col-lg-12">
+					<h1 class="text-white">
+						{% block titre %} {% endblock %}
+					</h1>
+					<p>{% block description %} {% endblock %}</p>
+					<div class="link-nav">
+						<span class="box">
+							<a href="/">Accueil </a>
+							<i class="lnr lnr-arrow-right"></i>
+							<a href="">{% block page %} {% endblock %}</a>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		{# <div class="rocket-img">
+			<img src="img/rocket.png" alt="">
+		</div> #}
+	</section>
+
+  <div class="container">
+              
+              
+                {% block body %}{% endblock %}
+              
+            </div>
+
+          <script src="/../js/vendor/jquery-2.2.4.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	 crossorigin="anonymous"></script>
+	<script src="/../js/vendor/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+	<script src="/../js/easing.min.js"></script>
+	<script src="/../js/hoverIntent.js"></script>
+	<script src="/../js/superfish.min.js"></script>
+	<script src="/../js/jquery.ajaxchimp.min.js"></script>
+	<script src="/../js/jquery.magnific-popup.min.js"></script>
+	<script src="/../js/owl.carousel.min.js"></script>
+	<script src="/../js/owl-carousel-thumb.min.js"></script>
+	<script src="/../js/jquery.sticky.js"></script>
+	<script src="/../js/jquery.nice-select.min.js"></script>
+	<script src="/../js/parallax.min.js"></script>
+	<script src="/../js/waypoints.min.js"></script>
+	<script src="/../js/wow.min.js"></script>
+	<script src="/../js/jquery.counterup.min.js"></script>
+	<script src="/../js/mail-script.js"></script>
+	<script src="/../js/main.js"></script>
+        {% block javascripts %} {% endblock %}
+
+
+  </body>

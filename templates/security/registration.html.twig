@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+
+{% block titre %} Inscription {% endblock %}
+{% block page %} Inscription {% endblock %}
+{% block body %}
+
+<style>
+    
+    h2{
+        margin-top: 2%;
+    }
+    label { margin: 1em auto; max-width: 800px; width: 15%;}
+    input {
+        width: 20%;
+        padding-left: 1%;
+        
+    }
+    form {
+        margin-left: 5%;
+    }
+    label:after {
+        content: '\A';
+        white-space: pre;
+    }
+</style>
+
+    <h2>Inscription</h2>
+    <br>
+   
+    {{form_start(form)}}
+        <br>
+        <div class="form-group">
+            {{form_row(form.email , {'label': 'Email' , 'attr':{'placeholder' : 'Insert email  '}})}}
+            {{form_row(form.prenom , {'label': 'First name' , 'attr':{'placeholder' : 'Insert your first name  '}})}}
+            {{form_row(form.nom , {'label': 'Last name' , 'attr':{'placeholder' : 'Insert your last name'}})}}
+            {{form_row(form.username , {'label': 'Username' , 'attr':{'placeholder' : 'Insert username  '}})}}
+            {{form_row(form.password , {'label': 'Password' , 'attr':{'placeholder' : 'Insert password  '}})}}
+            {{form_row(form.confirm_password , {'label': 'Confirm password' , 'attr':{'placeholder' : 'Repeat your password  '}})}}
+        </div>
+        <br>
+        <button type="submit" class="btn btn-outline-primary">register</button>
+    {{form_end(form)}}
+
+{% endblock %}

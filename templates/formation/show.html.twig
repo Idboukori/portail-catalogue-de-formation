@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formation{% endblock %}
+{% block titre %} {{ formation.intitule }} {% endblock %}
+{% block description %} {{ formation.description }} {% endblock %}
+{% block page %} Formation {% endblock %}
+{% block body %}
+<br>
+    <br>
+    <div class="card mb-3">
+  
+  <div class="card-body">
+    <div class="row">
+        <div class="col-md-8">
+<img class="card-img-top" width="100px" height="auto" src="/../img/{{formation.image}}" alt="Card image cap">
+
+                {# <table style=" margin-top : 60px;" class="table">
+                        <tbody>
+                            <tr>
+                                <th>Id</th>
+                                <td>{{ formation.id }}</td>
+                            </tr>
+                            <tr>
+                                <th>Intitule</th>
+                                <td>{{ formation.intitule }}</td>
+                            </tr>
+                            <tr>
+                                <th>Description</th>
+                                <td>{{ formation.description }}</td>
+                            </tr>
+                            <tr>
+                                <th>Duree</th>
+                                <td>{{ formation.duree }}</td>
+                            </tr>
+                            <tr>
+                                <th>Type</th>
+                                <td>{{ formation.type }}</td>
+                            </tr>
+                        </tbody>
+                    </table> #}
+                    
+            </div>
+                    <div class=" list-group col-md-4">
+                    <br> <br>
+                                <label class="list-group-item list-group-item-action active">
+                                        Sessions
+                                      </label>
+                                      {% if app.user %}
+                                      {% for session in formation.sessions %}
+                                      {% if "now"|date("Y/m/d") < session.date |date("Y/m/d")  %}
+                                      
+                                      {% if benef in formation.beneficiaires %}
+                                      {% if benef in session.Beneficiaire %}
+                                      <label class="list-group-item list-group-item-action">{{session.date |date("d/m/Y")}}  >>registered </label>
+                                      {% else %}
+                                      <label class="list-group-item list-group-item-action">{{session.date |date("d/m/Y")}} <a style="margin-left: 150px;" href="{{ path('reg_session',{'id' : session.id}) }}">register</a> </label>
+                                      {% endif %}
+                                      {% else %}
+                                      <label class="list-group-item list-group-item-action">{{session.date |date("d/m/Y")}} register on formation first </label>
+                                      {% endif %}
+                                      {% else %}
+                                      <label class="list-group-item list-group-item-action"> {{session.date |date("d/m/Y")}} expired </label>
+                                      {% endif %} 
+                                     {% endfor %}
+                                     {% if app.user and formation.formateur.email == app.user.email %}
+                                     <a id="li" onclick="myFunction()" class="btn btn-info btn-sm"> Add session </a>
+                                     <div style="display: none"  id="DD">
+                                        {{ form_start(form) }}
+                                        {{ form_widget(form) }}
+                                        <button class="btn btn-info btn-sm">{{ button_label|default('Save') }}</button>
+                                         {{ form_end(form) }}
+                                     </div>
+                                     {% endif %}
+                                     {% else %}
+                                     <label class="list-group-item list-group-item-action"> Must Be Connected </label>
+
+                                     {% endif %}
+                        <br><br>
+                        
+
+                    </div>
+            </div>
+  </div>
+</div>  
+    
+   
+
+    {% if app.user and formation.formateur.email == app.user.email %}
+
+    <a style="border-radius: 10px; padding : 5px; margin-bottom : 10px;" class="btn btn-info"  href="{{ path('formation_edit', {'id': formation.id}) }}">edit</a>
+    <a style="border-radius: 10px; padding : 5px; margin-bottom : 10px;" class="btn btn-info"  href="{{ path('quiz_new', {'id': formation.id}) }}">Quiz</a>
+    <a style="border-radius: 10px; padding : 5px; margin-bottom : 10px;" class="btn btn-info"  href="{{ path('demande_formation_index', {'id': formation.id}) }}">Demandes</a>
+            
+{{ include('formation/_delete_form.html.twig') }}
+    <br><br>
+
+    {% endif %}
+    <h4>Commentaires</h4>
+<br>
+    {% for comment in formation.commentaires %}
+            <label style="color: darkblue ; font-weight: bold">{{comment.benef}}</label> : {{comment.comment}} <br> <br>
+    {% endfor %}
+    <br> <br>
+    {% if app.user  %}
+    {{ form_start(form2) }}
+    {{ form_widget(form2) }}
+    <br><br>
+     {{ form_end(form2) }}
+     <button class="genric-btn success circle arrow" type="submit"> envoyer </button>
+    {% endif %}
+
+    <br><br>
+    <script>
+        function myFunction() {
+          var x = document.getElementById("DD");
+          if (x.style.display === "none") {
+              document.getElementById("li").style.display == "none"
+            x.style.display = "block";
+          } else {
+            x.style.display = "none";
+          }
+        }
+        </script>
+{% endblock %}

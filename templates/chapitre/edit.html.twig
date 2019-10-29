@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Chapitre{% endblock %}
+
+{% block body %}
+    <h1>Edit Chapitre</h1>
+
+    {{ include('chapitre/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a style="border-radius: 10px; padding : 5px; margin-bottom : 10px;" class="btn btn-info" href="{{ path('chapitre_index') }}">back to list</a>
+
+    {{ include('chapitre/_delete_form.html.twig') }}
+{% endblock %}
